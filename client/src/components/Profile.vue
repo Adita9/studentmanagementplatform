@@ -37,13 +37,12 @@
                 </b-card-text>
             </b-card>
 
-
-            <h1 align="left" class="align-profile">Marks</h1>
         </div>
     </div>
 </template>
 
 <script>
+
     export default {
         props: {
             personalInfo: Object,
