@@ -1,7 +1,8 @@
 <template>
     <div class="outset" id="schedule">
-        <iframe src="https://orar.sisc.ro/" width="300" height="300">
-        </iframe>
+        asdsadsadsadasaddadss
+        <!--<iframe src="https://orar.sisc.ro/" width="300" height="300">-->
+        <!--</iframe>-->
     </div>
 </template>
 

@@ -54,11 +54,7 @@
         }
     }
 
-    function showSchedule() {
-        return {
-            components: Schedule
-        }
-    }
+    
 </script>
 
 <style>
