@@ -1,8 +1,11 @@
 <template>
     <div>
         <h1>Upload file</h1>
-        <input type="file" @change="onFileSelected"/>
-        <button @click="onUpload">Upload</button>
+        <div>
+            <input @submit="validateFile" type="file" @change="onFileSelected"/>
+            <button @click="validateFile">Upload</button>
+
+        </div>
     </div>
 </template>
 
@@ -14,7 +17,8 @@
         ,
         data() {
             return {
-                selectedFile: null
+                selectedFile: null,
+                validExtention: '.pdf'
             }
         },
         methods: {
@@ -29,6 +33,16 @@
                     .then(res => {
                         console.log(res);
                     })
+            },
+            validateFile() {
+                var ext = this.selectedFile.name.substr(this.selectedFile.name.lastIndexOf('.'));
+                console.log(ext);
+                if (!(ext === this.validExtention
+                )) {
+                    alert("Please introduce a .pdf file!");
+                } else {
+                    this.onUpload();
+                }
             }
         }
 

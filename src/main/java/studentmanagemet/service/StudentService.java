@@ -2,10 +2,18 @@ package studentmanagemet.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
+import studentmanagemet.entity.RequestDto;
 import studentmanagemet.entity.Student;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -24,5 +32,23 @@ public class StudentService {
         URI uri = new URI("http://localhost:9090/studentstorage/students/" + String.valueOf(id));
 
         return restTemplate.getForObject(uri, Student.class);
+    }
+
+    public Student saveDocument(final Integer id, MultipartFile file, String email) throws URISyntaxException, IOException {
+        byte[] bytes = file.getBytes();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        MultiValueMap<String, Object> body
+                = new LinkedMultiValueMap<>();
+        body.add("file", bytes);
+
+        HttpEntity<MultiValueMap<String, Object>> requestEntity
+                = new HttpEntity<>(body, headers);
+
+
+        URI uri = new URI("http://localhost:9090/studentstorage/students/" + String.valueOf(id) + "/documents");
+
+        return restTemplate.postForObject(uri, requestEntity, Student.class);
     }
 }
