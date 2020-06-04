@@ -1,20 +1,24 @@
 <template>
     <div class="outset">
+        <router-view></router-view>
+
         <h1 align="left">Marks</h1>
 
-            <b-button variant="light" block squared="true" pill="true" :pressed.sync="firstYear">First year</b-button>
-            <div v-if="firstYear === true">
-                <b-table striped hover :items="year1"></b-table>
-            </div>
+        <b-button variant="light" block :squared="true" :pill="true" :pressed.sync="firstYear">First year</b-button>
+        <div v-if="firstYear === true">
+            <b-table striped hover :items="year1"></b-table>
+        </div>
 
-            <b-button block squared="true" pill="true" :pressed.sync="secondYear" variant="light">Second year</b-button>
-            <div v-if="secondYear === true">
-                <b-table block striped hover :items="year2"></b-table>
-            </div>
-            <b-button block squared="true" pill="true" :pressed.sync="thirdYear" variant="light">Third year</b-button>
-            <div v-if="thirdYear === true">
-                <b-table striped hover :items="year3"></b-table>
-            </div>
+        <b-button block :squared="true" :pill="true" :pressed.sync="secondYear" variant="light">Second year
+        </b-button>
+        <div v-if="secondYear === true">
+            <b-table block striped hover :items="year2"></b-table>
+        </div>
+        <b-button block :squared="true" :pill="true" :pressed.sync="thirdYear" variant="light">Third year</b-button>
+        <div v-if="thirdYear === true">
+            <b-table striped hover :items="year3"></b-table>
+        </div>
+
         <!--<b-table striped hover :items="items"></b-table>-->
     </div>
 </template>
@@ -45,7 +49,7 @@
                     {class: 'MAterie', Mark: 4, Credits: 8}
                 ],
                 firstYear: false,
-                secondYear:false,
+                secondYear: false,
                 thirdYear: false
             }
         }

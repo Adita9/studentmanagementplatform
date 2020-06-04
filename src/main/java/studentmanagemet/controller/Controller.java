@@ -2,14 +2,19 @@ package studentmanagemet.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 import studentmanagemet.entity.Student;
 import studentmanagemet.service.StudentService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.URISyntaxException;
 
 @RestController
@@ -24,7 +29,6 @@ public class Controller {
 
     @GetMapping("/")
     public ResponseEntity index(Model model) throws URISyntaxException {
-
         Student student = studentService.getStudent(1);
         model.addAttribute("Studentul", "stud");
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -33,5 +37,15 @@ public class Controller {
 
     }
 
+    @PostMapping("/upload")
+
+    public ResponseEntity upload(HttpServletRequest request) {
+        StandardMultipartHttpServletRequest multipartRequest = new StandardMultipartHttpServletRequest(request);
+
+        MultipartFile pdf = multipartRequest.getFile("pdf");
+
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 
 }

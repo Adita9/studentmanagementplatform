@@ -11,18 +11,22 @@
 
             <b-collapse id="nav-text-collapse" is-nav>
                 <div class="navbar-brand">
-                    <b-navbar-brand href="#profile">
-                        <img src="https://img.icons8.com/ios/50/000000/user-menu-male.png" width="30" height="30"
-                             alt="Profile">
-                        <div class="navcolor">Profile</div>
+                    <b-navbar-brand href="#">
+                        <router-link to="/profile">
+                            <img src="https://img.icons8.com/ios/50/000000/user-menu-male.png" width="30" height="30"
+                                 alt="Profile">
+                            <div class="navcolor">Profile</div>
+                        </router-link>
                     </b-navbar-brand>
                 </div>
 
                 <div class="navbar-brand">
                     <b-navbar-brand href="#">
-                        <img src="https://img.icons8.com/ios/50/000000/report-card.png" width="30" height="30"
-                             alt="Marks">
-                        <div class="navcolor">Marks</div>
+                        <router-link to="/marks">
+                            <img src="https://img.icons8.com/ios/50/000000/report-card.png" width="30" height="30"
+                                 alt="Marks">
+                            <div class="navcolor">Marks</div>
+                        </router-link>
                     </b-navbar-brand>
                 </div>
 
@@ -46,9 +50,11 @@
 
                 <div class="navbar-brand">
                     <b-navbar-brand href="#">
-                        <img src="https://img.icons8.com/ios/50/000000/upload-document.png" width="30" height="30"
-                             alt="Upload documents">
-                        <div class="navcolor">Documents</div>
+                        <router-link to="/upload">
+                            <img src="https://img.icons8.com/ios/50/000000/upload-document.png" width="30" height="30"
+                                 alt="Upload documents">
+                            <div class="navcolor">Documents</div>
+                        </router-link>
                     </b-navbar-brand>
                 </div>
 
@@ -86,7 +92,8 @@
         margin-left: 20px !important;
         margin-right: 20px;
     }
-    .navigation-top{
+
+    .navigation-top {
         position: fixed; /* Set the navbar to fixed position */
         top: 0; /* Position the navbar at the top of the page */
         width: 100%; /* Full width */

@@ -1,38 +1,20 @@
 <template>
     <div id="app">
         <Header></Header>
-        <Profile
-                :personalInfo="student.personalInfo"
-                :schoolInformation="student.schoolInformation">
-
-        </Profile>
-        <Marks></Marks>
-
-        <div align="left" class="align-data, outset">
-            <h1>Schedule</h1>
-            <b-button squared="true" pill="true" :pressed.sync="myToggle" variant="light">Schedule</b-button>
-            <div id="schedule" v-if="myToggle === true">
-                <schedule></schedule>
-            </div>
-        </div>
+        <router-view></router-view>
 
     </div>
 </template>
 
 <script>
     import Header from './components/Header.vue'
-    import Profile from './components/Profile'
-    import Schedule from './components/Schedule.vue'
-    import Marks from './components/Marks.vue'
-
+    // import Profile from "./components/Profile";
 
     export default {
-        name: 'App',
+        name: "App",
         components: {
-            Header,
-            Profile,
-            'schedule': Schedule,
-            Marks
+            // Profile,
+            Header
         },
         data() {
             return {
@@ -54,7 +36,7 @@
         }
     }
 
-    
+
 </script>
 
 <style>
