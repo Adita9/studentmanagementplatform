@@ -2,7 +2,6 @@ package studentmanagemet.entity;
 
 
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
@@ -19,7 +18,7 @@ public class StudentDocument {
     private boolean accepted;
     private String professorEmail;
 
-    private MultipartFile file;
+    private String fileValue;
 
     private String contentId;
     private long contentLength;

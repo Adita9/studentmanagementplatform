@@ -5,6 +5,12 @@
             <input @submit="validateFile" type="file" @change="onFileSelected"/>
             <button @click="validateFile">Upload</button>
 
+            <div>
+                <button @click="getFiles">Afiseaza cererile</button>
+               {{student.documentsReferences[0].name}}
+<!---->
+            </div>
+
         </div>
     </div>
 </template>
@@ -18,8 +24,20 @@
         data() {
             return {
                 selectedFile: null,
-                validExtention: '.pdf'
+                validExtention: '.pdf',
+                student: Object
             }
+        }, mounted: function () {
+
+            fetch('http://localhost:8080/studentplatform/', {
+                method: 'get'
+            })
+                .then((response) => {
+                    return response.json()
+                })
+                .then((jsonData) => {
+                    this.student = jsonData
+                })
         },
         methods: {
             onFileSelected(event) {
@@ -43,7 +61,19 @@
                 } else {
                     this.onUpload();
                 }
+            },
+            getFiles() {
+                fetch('http://localhost:8080/studentplatform/', {
+                    method: 'get'
+                })
+                    .then((response) => {
+                        return response.json()
+                    })
+                    .then((jsonData) => {
+                        this.student = jsonData
+                    })
             }
+
         }
 
     }
