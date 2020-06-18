@@ -36,6 +36,13 @@ public class Controller {
         return new ResponseEntity(student, httpHeaders, HttpStatus.OK);
 
     }
+    @GetMapping("/status")
+    public ResponseEntity status() {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Access-Control-Allow-Origin", "*");
+        return new ResponseEntity(true, httpHeaders, HttpStatus.OK);
+
+    }
 
     @PostMapping("/upload")
     public ResponseEntity upload(HttpServletRequest request) throws URISyntaxException, IOException {
