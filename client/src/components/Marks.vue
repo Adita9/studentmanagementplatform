@@ -10,7 +10,7 @@
         </div>
 
         <b-button block :squared="true" :pill="true" :pressed.sync="secondYear" variant="light">Second year
-        </b-button>
+    </b-button>
         <div v-if="secondYear === true">
             <b-table block striped hover :items="year2"></b-table>
         </div>
