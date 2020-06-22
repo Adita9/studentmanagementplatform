@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="overflow-x:auto;">
         <table class="mega-style">
             <td>
                 <div class="mega-style" align="center">
@@ -38,6 +38,8 @@
                     <!--<input @submit="validateFile" type="file" @change="onFileSelected"/>-->
                     <!--<button @click="validateFile">Upload</button>-->
                     <b-collapse id="collapse-b" class="mt-2">
+                        <div class=""></div>
+                        <b-form-input class="mega-style4" placeholder="Short summery" list="input-list" id="input-with-list"></b-form-input>
                         <b-form-file @submit="validateFile" @change="onFileSelected"
                                      v-model="file"
                                      :state="Boolean(file)"
@@ -58,15 +60,12 @@
         </table>
         <div>
             <h1>My documents</h1>
-            <table>
-                <td>
-                    <p class="mega-table">File Name</p>
-                </td>
-                <td><p class="mega-table">Sent to</p></td>
-                <td><p class="mega-table">Date</p></td>
-                <td><p class="mega-table">Download</p></td>
-
-            </table>
+            <b-table block striped hover :items="mydocuuments">
+                <template v-slot:cell(download)="data">
+                    <!-- `data.value` is the value after formatted by the Formatter -->
+                    <a :href="'https://localhost:9090/studentstorage/students/1/files/1'">Direct download</a>
+                </template>
+            </b-table>
         </div>
     </div>
 </template>
@@ -80,7 +79,24 @@
             return {
                 selectedFile: null,
                 validExtention: '.pdf',
-                mydocuuments: [],
+                mydocuuments: [
+                    {
+                        File: 'bachelorDegreeRequestV21',
+                        type: '.pdf',
+                        sent_to: ' catalin.boja@ie.ase.ro',
+                        date: '22.10.2019',
+                        accepted: true,
+                        download:  'https://localhost:9090/studentstorage/students/1/files/1'
+                    },
+                    {
+                        File: 'tax_validation231',
+                        type: '.png',
+                        sent_to: ' secretariat ASE',
+                        date: '20.03.2020',
+                        accepted: true,
+                        download:  'https://localhost:9090/studentstorage/students/1/files/1'
+                    }
+                ],
                 email: '',
                 student: Object
             }
@@ -142,6 +158,9 @@
 
     .mega-style3 {
         alignment: center;
+    }
+    .mega-style4 {
+        height: 200px;
     }
 
     .mega-table {

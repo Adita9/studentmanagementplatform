@@ -4,6 +4,7 @@
             <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/74/Logo_ASE_Bucharest.png/250px-Logo_ASE_Bucharest.png"
                  width="400" height="300">
         </div>
+        <h1 class="mega-style2">Webstudent 2.0</h1>
         <div>
             <b-form  @submit.stop.prevent>
                 <label  for="feedback-user">User ID</label>
@@ -45,6 +46,8 @@
 }
 .mega-style2{
     padding-top: 2%;
+    font-family: "Roboto", "Segoe UI", "GeezaPro", "DejaVu Serif", "sans-serif", "-apple-system", "BlinkMacSystemFont";
+
 }
 
 </style>

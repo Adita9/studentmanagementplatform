@@ -1,22 +1,26 @@
-<template>
-    <div id="app">
-        <div v-if="true">
+<template class="back">
+    <div class="back" id="app">
+        <div v-if="student.loggedin">
             <Header></Header>
             <router-view></router-view>
+            <Login></Login>
         </div>
-
+        <div v-else>
+            <Login></Login>
+        </div>
 
     </div>
 </template>
 
 <script>
     import Header from './components/Header.vue'
-    // import Profile from "./components/Profile";
+    import Login from "./components/Login";
 
     export default {
         name: "App",
         components: {
-            // Profile,
+            Login,
+            Profile,
             Header
         },
         data() {
@@ -86,6 +90,11 @@
         border-bottom: 0px;
         border-left: 0px;
         border-right: 0px;
+
+    }
+
+    .back {
+        font-family: "Roboto", "Segoe UI", "GeezaPro", "DejaVu Serif", "sans-serif", "-apple-system", "BlinkMacSystemFont";
 
     }
 

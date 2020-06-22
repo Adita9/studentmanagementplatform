@@ -1,19 +1,22 @@
 <template>
-    <div>
-        <div>
-            <b-card>
+    <div class="back">
+        <div style="overflow-x:auto;">
+            <b-card class="back">
                 <b-card-text>
                     <a id="profile"></a>
-                    <img src="https://scontent-frt3-1.xx.fbcdn.net/v/t1.15752-9/101204796_3098610436852247_6965571067230289920_n.jpg?_nc_cat=108&_nc_sid=b96e70&_nc_oc=AQkd4_HI1mDsGW3FL4rLzHB476Qjk11n1a4aGFujDzv6y6udiSkItfHfmxp2IezZXFY&_nc_ht=scontent-frt3-1.xx&oh=57032758299be90a536d9825cdd0a933&oe=5EFB8281"
-                         width="200" height="200" align="left">
+                    <img  class="align-profile" src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/512/user-male-icon.png"
+                         width="180" height="200" align="left">
                     <h1 align="left" class="">{{student.personalInfo.name}}</h1>
                     <table>
                         <td>
-                            <tr><p class="align-data" align="left"> Date of birth: {{student.personalInfo.dateOfBirth}}</p></tr>
-                            <tr><p class="align-data" align="left"> Place of birth: {{student.personalInfo.placeOfBirth}}</p>
+                            <tr><p class="align-data" align="left"> Date of birth:
+                                {{student.personalInfo.dateOfBirth}}</p></tr>
+                            <tr><p class="align-data" align="left"> Place of birth:
+                                {{student.personalInfo.placeOfBirth}}</p>
                             </tr>
                             <tr><p class="align-data" align="left"> Email: {{student.personalInfo.email}}</p></tr>
-                            <tr><p class="align-data" align="left"> Phone number: {{student.personalInfo.phoneNumber}}</p></tr>
+                            <tr><p class="align-data" align="left"> Phone number:
+                                {{student.personalInfo.phoneNumber}}</p></tr>
                             <tr><p class="align-data" align="left"> Address: {{student.personalInfo.address}}</p>
                             </tr>
                             <tr><p class=" align-data" align="left"> Wallet: {{student.personalInfo.wallet}}
@@ -23,7 +26,8 @@
                             <tr><p class="align-data" align="left"> Specialization:
                                 {{student.schoolInformation.collageYear[0].specialization}}
                             </p></tr>
-                            <tr><p class="align-data" align="left"> Year: {{student.schoolInformation.collageYear[0].year}}</p>
+                            <tr><p class="align-data" align="left"> Year:
+                                {{student.schoolInformation.collageYear[0].year}}</p>
                             </tr>
                             <tr><p class="align-data" align="left"> Semester:
                                 {{student.schoolInformation.collageYear[0].semester}}</p></tr>
@@ -38,19 +42,26 @@
             </b-card>
 
         </div>
+        <div>
+            <Marks></Marks>
+        </div>
     </div>
+
 </template>
 
 <script>
 
+    import Marks from "./Marks";
+
     export default {
         name: "Profile",
-        data(){
-            return{
+        components: {Marks},
+        data() {
+            return {
                 student: Object
             }
         }
-        ,mounted: function () {
+        , mounted: function () {
 
             fetch('http://localhost:8080/studentplatform/', {
                 method: 'get'
@@ -72,7 +83,7 @@
     }
 
     .align-profile {
-        margin-left: 200px;
+        margin-right: 10px;
     }
 
     .align-data {
@@ -80,5 +91,12 @@
         width: 400px;
         box-sizing: content-box;
     }
+
+    .back {
+        background: #F8F8FF;
+        width: 100%;
+        height: 100%;
+    }
+
 
 </style>

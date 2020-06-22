@@ -32,9 +32,11 @@
 
                 <div class="navbar-brand">
                     <b-navbar-brand href="#">
-                        <img src="https://img.icons8.com/ios/50/000000/wallet.png" width="30" height="30"
-                             alt="Taxes">
-                        <div class="navcolor">Taxes</div>
+                        <router-link to="/taxes">
+                            <img src="https://img.icons8.com/ios/50/000000/wallet.png" width="30" height="30"
+                                 alt="Taxes">
+                            <div class="navcolor">Taxes</div>
+                        </router-link>
                     </b-navbar-brand>
                 </div>
 
@@ -66,8 +68,16 @@
                 <template v-slot:button-content>
                     <em>Adrian Neagoe</em>
                 </template>
-                <b-dropdown-item href="#">Profile</b-dropdown-item>
-                <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+                <b-dropdown-item href="#">
+                    <router-link to="/profile">
+                        Profile
+                    </router-link>
+                </b-dropdown-item>
+                <b-dropdown-item href="#">
+                    <router-link to="/login">
+                        Sign Out
+                    </router-link>
+                </b-dropdown-item>
             </b-nav-item-dropdown>
         </b-navbar>
     </div>

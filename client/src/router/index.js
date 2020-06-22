@@ -6,6 +6,8 @@ import Marks from "../components/Marks";
 import Profile from "../components/Profile"
 import Upload from "../components/Upload"
 import Login from "../components/Login"
+import Taxes from "../components/Taxes"
+
 
 
 Vue.use(VueRouter)
@@ -53,6 +55,13 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: Login
+
+    },
+
+    {
+        path: '/taxes',
+        name: 'Taxes',
+        component: Taxes
 
     },
 ]
