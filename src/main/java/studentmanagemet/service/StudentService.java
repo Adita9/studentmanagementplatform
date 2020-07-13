@@ -51,7 +51,7 @@ public class StudentService {
 //
     }
 
-    public Student saveDocument(final Integer id, MultipartFile file, String email) throws URISyntaxException, IOException {
+    public Student saveDocument(final Integer id, MultipartFile file, String name, String email) throws URISyntaxException, IOException {
         byte[] bytes = file.getBytes();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -67,8 +67,8 @@ public class StudentService {
                 .accepted(false)
                 .fileValue(document)
                 .mimeType(file.getContentType())
-                .name(file.getName())
-                .professorEmail("catalin.boja@ie.ase.ro")
+                .name(name)
+                .professorEmail(email)
                 .build();
 
         HttpEntity<StudentDocument> requestEntity

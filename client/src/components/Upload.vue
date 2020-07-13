@@ -63,8 +63,8 @@
             <h1>My documents</h1>
             <b-table block striped hover :items="documents">
                 <!--<template v-slot:cell(download)="">-->
-                    <!--&lt;!&ndash; `data.value` is the value after formatted by the Formatter &ndash;&gt;-->
-                    <!--<b-link :href="item.download">{{ item.download }}</b-link>-->
+                <!--&lt;!&ndash; `data.value` is the value after formatted by the Formatter &ndash;&gt;-->
+                <!--<b-link :href="item.download">{{ item.download }}</b-link>-->
                 <!--</template>-->
                 <template v-slot:cell(download)="{ item, value }">
                     <b-link :href="value">Direct download</b-link>
@@ -135,13 +135,22 @@
         },
         methods: {
             onFileSelected(event) {
-                this.selectedFile = event.target.files[0]
+                this.selectedFile = event.target.files[0];
+                this.email = document.getElementById("inline-form-input-name");
+                console.log(this.email);
             },
 
             onUpload() {
                 const fd = new FormData();
                 fd.append('pdf', this.selectedFile, this.selectedFile.name);
-                axios.post('http://localhost:8080/studentplatform/upload/', fd)
+                fd.append('email', 'asdasds');
+                axios.post('http://localhost:8080/studentplatform/upload/', fd, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }
+                )
+
                     .then(res => {
                         console.log(res);
                     })

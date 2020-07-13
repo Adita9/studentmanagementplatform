@@ -97,11 +97,13 @@ public class Controller {
     public ResponseEntity upload(HttpServletRequest request) throws URISyntaxException, IOException {
         StandardMultipartHttpServletRequest multipartRequest = new StandardMultipartHttpServletRequest(request);
 
+
         MultipartFile pdf = multipartRequest.getFile("pdf");
+        String name = pdf.getOriginalFilename();
 
         System.out.println(pdf.getContentType());
 
-        studentService.saveDocument(1, pdf, "email");
+        studentService.saveDocument(1, pdf, name, "");
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
