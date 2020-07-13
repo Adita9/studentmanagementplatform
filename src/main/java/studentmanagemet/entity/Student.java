@@ -13,6 +13,7 @@ import java.util.List;
 @ToString
 public class Student {
 
+    private boolean status = false;
     private int id;
     private PersonalInfo personalInfo;
     private SchoolInformation schoolInformation;

@@ -39,7 +39,8 @@
                     <!--<button @click="validateFile">Upload</button>-->
                     <b-collapse id="collapse-b" class="mt-2">
                         <div class=""></div>
-                        <b-form-input class="mega-style4" placeholder="Short summery" list="input-list" id="input-with-list"></b-form-input>
+                        <b-form-input class="mega-style4" placeholder="Short summery" list="input-list"
+                                      id="input-with-list"></b-form-input>
                         <b-form-file @submit="validateFile" @change="onFileSelected"
                                      v-model="file"
                                      :state="Boolean(file)"
@@ -60,10 +61,13 @@
         </table>
         <div>
             <h1>My documents</h1>
-            <b-table block striped hover :items="mydocuuments">
-                <template v-slot:cell(download)="data">
-                    <!-- `data.value` is the value after formatted by the Formatter -->
-                    <a :href="'https://localhost:9090/studentstorage/students/1/files/1'">Direct download</a>
+            <b-table block striped hover :items="documents">
+                <!--<template v-slot:cell(download)="">-->
+                    <!--&lt;!&ndash; `data.value` is the value after formatted by the Formatter &ndash;&gt;-->
+                    <!--<b-link :href="item.download">{{ item.download }}</b-link>-->
+                <!--</template>-->
+                <template v-slot:cell(download)="{ item, value }">
+                    <b-link :href="value">Direct download</b-link>
                 </template>
             </b-table>
         </div>
@@ -86,21 +90,26 @@
                         sent_to: ' catalin.boja@ie.ase.ro',
                         date: '22.10.2019',
                         accepted: true,
-                        download:  'https://localhost:9090/studentstorage/students/1/files/1'
+                        download: 'http://localhost:9090/studentstorage/students/1/files/1'
                     },
+
                     {
                         File: 'tax_validation231',
                         type: '.png',
                         sent_to: ' secretariat ASE',
                         date: '20.03.2020',
                         accepted: true,
-                        download:  'https://localhost:9090/studentstorage/students/1/files/1'
-                    }
+                        download: 'http://localhost:9090/studentstorage/students/1/files/1'
+                    },
                 ],
                 email: '',
-                student: Object
+                student: Object,
+                documents: []
             }
-        }, mounted: function () {
+        }
+
+
+        , mounted: function () {
 
             fetch('http://localhost:8080/studentplatform/', {
                 method: 'get'
@@ -109,8 +118,20 @@
                     return response.json()
                 })
                 .then((jsonData) => {
-                    this.student = jsonData
-                })
+                        this.student = jsonData
+                        fetch('http://localhost:8080/studentplatform/displayFiles/' + this.student.id, {
+                            method: 'get'
+                        })
+                            .then((response) => {
+                                return response.json()
+                            })
+                            .then((jsonData) => {
+                                this.documents = jsonData
+                            })
+
+                    }
+                )
+
         },
         methods: {
             onFileSelected(event) {
@@ -137,8 +158,11 @@
             },
             getFiles() {
                 axios.get('http://localhost:8080/studentplatform/files/', this.student.id)
-                    .then(res => {
-                        console.log(res);
+                    .then((response) => {
+                        return response.json()
+                    })
+                    .then((jsonData) => {
+                        this.documents = jsonData
                     })
             }
         }
@@ -159,6 +183,7 @@
     .mega-style3 {
         alignment: center;
     }
+
     .mega-style4 {
         height: 200px;
     }

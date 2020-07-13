@@ -1,15 +1,15 @@
 package studentmanagemet.service;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
+import studentmanagemet.entity.FileDocument;
 import studentmanagemet.entity.Student;
 import studentmanagemet.entity.StudentDocument;
 
@@ -19,9 +19,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Component
 public class StudentService {
 
@@ -44,50 +46,48 @@ public class StudentService {
         URI uri = new URI("http://localhost:9090/studentstorage/students/" + String.valueOf(id) + "/files");
 
         StudentDocument[] result = restTemplate.getForObject(uri, StudentDocument[].class);
-        String fileValue = result[0].getFileValue();
-        return fileValue.getBytes();
-//        List<MultipartFile> pfds = new ArrayList<>();
-
-
-//        List<StudentDocument> studentDocuments = Arrays.asList(result);
-//        for (StudentDocument s : studentDocuments) {
-//            String fileValue = s.getFileValue();
-//            File file = writeByte(fileValue.getBytes(), s.getName());
-//            DiskFileItem fileItem = new DiskFileItem("file.pdf",
-//                    "application/pdf", true, file.getName(),
-//                    100000000, file.getParentFile());
-//            InputStream input =  new FileInputStream(file);
-//            OutputStream os = fileItem.getOutputStream();
-//            int ret = input.read();
-//            while ( ret != -1 )
-//            {
-//                os.write(ret);
-//                ret = input.read();
-//            }
-//            os.flush();
-//            MultipartFile pdf = new CommonsMultipartFile(fileItem);
-//            pfds.add(pdf);
-//        }
-
-//        return pfds;
+        FileDocument fileValue = result[0].getFileValue();
+        return fileValue.getContent();
+//
     }
 
     public Student saveDocument(final Integer id, MultipartFile file, String email) throws URISyntaxException, IOException {
         byte[] bytes = file.getBytes();
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
-        MultiValueMap<String, Object> body
-                = new LinkedMultiValueMap<>();
-        body.add("file", bytes);
+//        MultiValueMap<String, Object> body
+////                = new LinkedMultiValueMap<>();
+////        body.add("file", bytes);
 
-        HttpEntity<MultiValueMap<String, Object>> requestEntity
-                = new HttpEntity<>(body, headers);
+        FileDocument document = new FileDocument(bytes);
+
+        StudentDocument studentDocument = StudentDocument.builder()
+                .created(new Date())
+                .accepted(false)
+                .fileValue(document)
+                .mimeType(file.getContentType())
+                .name(file.getName())
+                .professorEmail("catalin.boja@ie.ase.ro")
+                .build();
+
+        HttpEntity<StudentDocument> requestEntity
+                = new HttpEntity<>(studentDocument);
 
 
         URI uri = new URI("http://localhost:9090/studentstorage/students/" + String.valueOf(id) + "/documents");
 
         return restTemplate.postForObject(uri, requestEntity, Student.class);
+    }
+
+    public List<StudentDocument> studentDocument(String id) throws URISyntaxException {
+
+
+        URI uri = new URI("http://localhost:9090/studentstorage/students/" + id + "/files");
+
+        StudentDocument[] forObject = restTemplate.getForObject(uri, StudentDocument[].class);
+
+        return Arrays.asList(forObject);
     }
 
     static File writeByte(byte[] bytes, String name) {
@@ -111,5 +111,14 @@ public class StudentService {
             System.out.println("Exception: " + e);
         }
         return file;
+    }
+
+    public void updateStatus(String id) throws URISyntaxException {
+
+        URI uri = new URI("http://localhost:9090/studentstorage/students/" + String.valueOf(id) + "/status");
+
+        log.info("Updating the status");
+
+        restTemplate.getForObject(uri, Void.class);
     }
 }

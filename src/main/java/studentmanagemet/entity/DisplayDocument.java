@@ -10,18 +10,14 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentDocument {
+public class DisplayDocument {
+
     private Long id;
     private String name;
     private Date created = new Date();
     private String summary;
     private boolean accepted;
     private String professorEmail;
-    private FileDocument fileValue;
     private String download;
-
-    private String contentId;
-    private long contentLength;
     private String mimeType = "application/pdf";
-
 }

@@ -1,9 +1,9 @@
 <template class="back">
     <div class="back" id="app">
-        <div v-if="student.loggedin">
+        <div v-if="student.status">
             <Header></Header>
             <router-view></router-view>
-            <Login></Login>
+            <!--<Login></Login>-->
         </div>
         <div v-else>
             <Login></Login>
@@ -20,7 +20,6 @@
         name: "App",
         components: {
             Login,
-            Profile,
             Header
         },
         data() {

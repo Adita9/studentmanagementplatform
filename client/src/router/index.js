@@ -9,7 +9,6 @@ import Login from "../components/Login"
 import Taxes from "../components/Taxes"
 
 
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -19,10 +18,8 @@ const routes = [
         redirect: to => {
 
 
-            const response = fetch('http://localhost:8080/studentplatform/status');
-            const myJson = response.body; //extract JSON from the http response
-            console.log(response.status);
-            console.log(myJson);
+
+            console.log(status);
             if (to) {
                 return {path: '/login'}
             }

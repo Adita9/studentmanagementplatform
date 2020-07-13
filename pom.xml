@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>studentmanagementplatform</groupId>
-    <artifactId>Adita9/studentmanagementplatform</artifactId>
+    <artifactId>studentmanagementplatform</artifactId>
     <version>1.0-SNAPSHOT</version>
     <parent>
         <groupId>org.springframework.boot</groupId>
