@@ -22,21 +22,7 @@
                             <tr><p class=" align-data" align="left"> Wallet: {{student.personalInfo.wallet}}
                                 RON</p></tr>
                         </td>
-                        <td>
-                            <tr><p class="align-data" align="left"> Specialization:
-                                {{student.schoolInformation.collageYear[0].specialization}}
-                            </p></tr>
-                            <tr><p class="align-data" align="left"> Year:
-                                {{student.schoolInformation.collageYear[0].year}}</p>
-                            </tr>
-                            <tr><p class="align-data" align="left"> Semester:
-                                {{student.schoolInformation.collageYear[0].semester}}</p></tr>
-                            <tr><p class="align-data" align="left"> Learning form:
-                                {{student.schoolInformation.collageYear[0].learningForm}}</p></tr>
-                            <tr><p class="align-data" align="left"> State:
-                                {{student.schoolInformation.collageYear[0].state}}</p>
-                            </tr>
-                        </td>
+
                     </table>
                 </b-card-text>
             </b-card>
@@ -44,6 +30,7 @@
         </div>
         <div>
             <Marks></Marks>
+            <Taxes></Taxes>
         </div>
     </div>
 
@@ -52,10 +39,11 @@
 <script>
 
     import Marks from "./Marks";
+    import Taxes from "./Taxes";
 
     export default {
         name: "Profile",
-        components: {Marks},
+        components: {Marks, Taxes},
         data() {
             return {
                 student: Object

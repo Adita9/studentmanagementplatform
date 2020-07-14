@@ -32,32 +32,7 @@
                     </b-collapse>
                 </div>
             </td>
-            <td>
-                <div class="mega-style" align="center">
-                    <b-button v-b-toggle="'collapse-b'">Secretariat request</b-button>
-                    <!--<input @submit="validateFile" type="file" @change="onFileSelected"/>-->
-                    <!--<button @click="validateFile">Upload</button>-->
-                    <b-collapse id="collapse-b" class="mt-2">
-                        <div class=""></div>
-                        <b-form-input class="mega-style4" placeholder="Short summery" list="input-list"
-                                      id="input-with-list"></b-form-input>
-                        <b-form-file @submit="validateFile" @change="onFileSelected"
-                                     v-model="file"
-                                     :state="Boolean(file)"
-                                     placeholder="Choose a file or drop it here..."
-                                     drop-placeholder="Drop file here...">
 
-                        </b-form-file>
-                        <!--<button @click="validateFile">Upload</button>-->
-                        <div class="mega-style2">
-                            <b-button @submit="validateFile" @click="validateFile" block :squared="true" :pill="true"
-                                      :pressed.sync="secondYear"
-                                      variant="light">Upload
-                            </b-button>
-                        </div>
-                    </b-collapse>
-                </div>
-            </td>
         </table>
         <div>
             <h1>My documents</h1>

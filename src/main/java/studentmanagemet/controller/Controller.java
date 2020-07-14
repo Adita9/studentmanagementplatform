@@ -15,6 +15,7 @@ import org.springframework.web.multipart.support.StandardMultipartHttpServletReq
 import studentmanagemet.entity.DisplayDocument;
 import studentmanagemet.entity.Student;
 import studentmanagemet.entity.StudentDocument;
+import studentmanagemet.service.EmailService;
 import studentmanagemet.service.StudentService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,10 +30,12 @@ import static org.springframework.http.MediaType.APPLICATION_PDF;
 public class Controller {
 
     private StudentService studentService;
+    private EmailService emailService;
 
     @Autowired
-    public Controller(StudentService studentService) {
+    public Controller(StudentService studentService, EmailService emailService) {
         this.studentService = studentService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/")
@@ -67,10 +70,10 @@ public class Controller {
             DisplayDocument displayDocument = DisplayDocument.builder()
                     .accepted(s.isAccepted())
                     .download(s.getDownload())
-                    .created(s.getCreated())
+                    .name(s.getName())
                     .name(s.getName())
                     .id(s.getId())
-                    .professorEmail(s.getProfessorEmail())
+                    .professorEmail("admin2@licenta.com")
                     .build();
 
             documents.add(displayDocument);
@@ -101,9 +104,11 @@ public class Controller {
         MultipartFile pdf = multipartRequest.getFile("pdf");
         String name = pdf.getOriginalFilename();
 
+
         System.out.println(pdf.getContentType());
 
-        studentService.saveDocument(1, pdf, name, "");
+        Student student = studentService.saveDocument(1, pdf, name, "");
+        emailService.sendMail(pdf,student);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }

@@ -28,6 +28,7 @@ import java.util.List;
 public class StudentService {
 
     public RestTemplate restTemplate;
+    private int counter = 0;
 
     @Autowired
     public StudentService(RestTemplate restTemplate) {
@@ -43,10 +44,11 @@ public class StudentService {
 
     public byte[] getFiles(final String id) throws URISyntaxException, IOException {
 
-        URI uri = new URI("http://localhost:9090/studentstorage/students/" + String.valueOf(id) + "/files");
+        URI uri = new URI("http://localhost:9090/studentstorage/students/" + 1 + "/files");
 
         StudentDocument[] result = restTemplate.getForObject(uri, StudentDocument[].class);
-        FileDocument fileValue = result[0].getFileValue();
+        FileDocument fileValue = result[counter].getFileValue();
+        counter++;
         return fileValue.getContent();
 //
     }
